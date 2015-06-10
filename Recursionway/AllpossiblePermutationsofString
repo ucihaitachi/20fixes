@@ -1,0 +1,62 @@
+
+public class PossiblePermutation {
+
+	
+	public static void main(String[] args) {
+	
+
+		char[] input = { 'a','b','c','d'};
+		char[] output = new char[5];
+		
+		auxPermutation(input, output, 0);
+	
+	}
+
+
+public static void auxPermutation(char[] input,char[] output,int d)
+{
+	if(d==input.length)
+	{
+
+		System.out.println(" ");
+		for(char ch:output)
+			
+		System.out.print(""+ch);
+		return;
+	}
+	
+	for(int i=0;i<input.length;i++)
+	{
+		if(validatePermutation(output,d,input[i]))
+		{
+		output[d]=input[i];
+		auxPermutation( input,output,d+1);
+		}  
+	}
+}
+public static boolean validatePermutation(char[] output,int d,char c)
+{ 
+	/*for(char ch:output)
+	{
+        System.out.println("value is"+ch+"c is"+c);
+		if(c==ch)
+		{
+			System.out.println("returning false");
+			return false;
+		}	
+	}*/
+	
+	//System.out.println("output.length"+d);
+	//System.out.println("");
+	
+	for(int i=0;i<d;i++)
+	{
+		if(c==output[i])
+		{
+			return false;
+		}	
+	}
+return true;
+}
+
+}
