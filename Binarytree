@@ -1,0 +1,159 @@
+package dataStructures.BinarySearchTree;
+
+public class BSTOperations<e> {
+	BinaryNode<e> root; 
+	int count=0;
+
+	
+public BSTOperations() {
+	//	super();
+		//root=new BinaryNode();
+	}
+
+
+boolean add(e element){
+
+	root= auxAdd(root,element);
+	
+	return true;
+}
+
+BinaryNode auxAdd(BinaryNode<e> current,e element){
+	
+if(current==null){
+	current=new BinaryNode(element);
+	return current;
+}else{
+	
+	if(current.compareTo(element)==1){
+		//left
+	    if(current!=null)
+		current.leftnode=auxAdd(current.leftnode, element);
+	    
+		/*child=new BinaryNode(element);*/
+		//current.setLeftnode(child);
+	
+	}else if(current.compareTo(element)==-1){
+		if(current!=null)
+			current.rightnode=auxAdd(current.rightnode, element);
+	}
+}
+
+
+	return current;
+}
+
+ void displayInorderBST(){
+	 
+	 auxDisplay(root);
+ 
+ }
+void auxDisplay(BinaryNode current){
+	if(current==null){
+		return;
+	}
+auxDisplay(current.leftnode);
+System.out.println(current.value);
+auxDisplay(current.rightnode);
+}
+void displayReveseInorderBST(){
+	 
+	 auxReverseInorderDisplay(root);
+
+}
+
+void  auxReverseInorderDisplay(BinaryNode current){
+	if(current==null){
+		return;
+	}
+	auxReverseInorderDisplay(current.rightnode);
+	System.out.println(current.value);
+	auxReverseInorderDisplay(current.leftnode);
+}
+
+void nlargestElement(int n){
+	Integer i=new Integer(0);
+	printnLargestElement(root,n);
+}
+void printnLargestElement(BinaryNode current,int n){
+	if(current==null){
+		return ;
+	}
+	
+		printnLargestElement(current.rightnode,n);
+		count=count+1;
+	if(count==n){
+	System.out.println(current.value);
+	return ;
+	}
+	printnLargestElement(current.leftnode,n);
+	
+//return count;
+}
+
+int height(){
+	int height =auxHeight(root);
+	System.out.println("the height is"+height);
+return height-1;
+}
+
+int auxHeight(BinaryNode node){
+	int lheight,rheight;
+
+	if(node==null ){
+		//lheight=1;
+		return 0;
+	}
+	lheight=auxHeight(node.leftnode);
+	lheight=lheight+1;
+	rheight=auxHeight(node.rightnode);
+	rheight=rheight+1;
+	if(lheight>rheight){
+		return lheight;
+	}else
+	{
+		return rheight;
+	}
+	
+	
+	//return 0;
+}
+
+
+void displayZigZag(){
+	int height=height();
+	boolean ltor=false;
+	for(int h=1;h<=height+1;h++){
+		auxZigZag(h, ltor, root);
+	ltor=!ltor;
+	}
+
+
+}
+
+
+void auxZigZag(int level,boolean ltor,BinaryNode head){
+	
+if(level==1){
+	if(head!=null)
+	{
+		System.out.println(head.value);
+	}
+	return;
+}
+
+if(ltor && head!=null){
+	
+	auxZigZag(level-1,ltor, head.leftnode);
+	auxZigZag(level-1,ltor, head.rightnode);
+	
+}else if(head!=null){
+	auxZigZag(level-1,ltor, head.rightnode);
+	auxZigZag(level-1,ltor, head.leftnode);
+}
+
+}
+
+
+
+}
