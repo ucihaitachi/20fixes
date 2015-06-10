@@ -1,0 +1,63 @@
+
+import java.util.HashMap;
+
+public class FirstNonRepeatedChar {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String s="QucikbrownfoxjuQmpsoveralazydog";
+		//hashmap
+		HashMap<Character, Integer> charhashmap=new HashMap<Character, Integer>();
+		charhashmap=hashStore(s,charhashmap);
+		getFirstNonRepeatedChar(s,charhashmap);
+	
+	}
+
+static HashMap<Character, Integer> hashStore(String s,HashMap<Character, Integer> charhashmap)
+{
+	//HashMap<Character, Integer> charhashmap=new HashMap<Character, Integer>();
+	int value=1,index=Integer.MAX_VALUE;
+	for(int i=0;i<s.length();i++)
+	{
+		
+		if(charhashmap.containsKey(s.charAt(i)))
+		{
+			
+			
+			
+			value=charhashmap.get(s.charAt(i));
+			charhashmap.put(s.charAt(i), value+1);
+			
+			//charhashmap.put(s.charAt(i),i);
+		}else
+		{
+			charhashmap.put(s.charAt(i), value);
+		
+		}
+	}
+System.out.println("the value is"+charhashmap);
+return charhashmap;
+}
+
+
+
+static void getFirstNonRepeatedChar(String s,HashMap<Character, Integer> charhashmap)
+{
+	for(int i=0;i<s.length();i++)
+	{
+
+		if(charhashmap.get(s.charAt(i))==1)
+		{
+		System.out.println("the forst repeated char is"+s.charAt(i));
+			return;
+		}
+	
+	}
+}
+
+
+}
