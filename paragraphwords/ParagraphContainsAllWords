@@ -1,0 +1,80 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+public class ParagraphContainsAllWords {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Map<String,Integer> map=findImpParagraph();
+		System.out.println("the map is"+map);
+	
+	}
+
+static Map<String,Integer> findImpParagraph()
+{
+	int paragraph=0,res,resp,dwords=0;
+	String line;
+	
+	Map<String,Integer> map=new HashMap<String, Integer>();
+	try {
+		
+		BufferedReader br=new BufferedReader(new FileReader("D:/Technical assistance/ApacheshiroWorkspace1/Twenty/src/stringpbms/firstnonrepeated"));
+		//System.out.println("the value is"+br.readLine());
+		while((line=br.readLine())!=null)
+		{
+			//paragraph++;
+			
+			if(line.trim().length()==0)
+			{
+				//System.out.println("inside empty line");
+				
+				paragraph++;
+				continue;
+			}else
+			{
+				paragraph++;
+			}
+			//System.out.println("paragraph is"+paragraph);
+			//System.out.println("hashnap is"+map);
+			StringTokenizer st=new StringTokenizer(line);
+			while(st.hasMoreTokens())
+			{
+				String word=st.nextToken();
+				Integer val;
+				if(map.get(word)!=null)
+				{
+				val=map.get(word);
+				}else
+					val=0;
+				//System.out.println("val is"+val);
+				
+				if(paragraph!=val)
+				{
+					map.put(word,paragraph);
+				dwords++;
+				}
+				
+			
+			
+			}
+		
+		
+		}
+		
+			} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+return map;
+}
+
+}
