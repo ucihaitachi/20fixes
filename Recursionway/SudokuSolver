@@ -1,0 +1,124 @@
+
+
+public class SudokuPuzzle {
+
+	
+	public static void main(String[] args) {
+		
+
+	int[][] in={{0,6,0,1,0,4,0,5,0},{0,0,8,3,0,5,6,0,0},{2,0,0,0,0,0,0,0,0,1},{8,0,0,4,0,7,0,0,6},{0,0,6,0,0,0,3,0,0},{7,0,0,9,0,1,0,0,4},{5,0,0,0,0,0,0,0,2},{0,0,7,2,0,6,9,0,0},{0,4,0,5,0,8,0,7,0}};
+		/*int[][] in=new int[9][9];
+		in={{0,6,0,1,0,4,0,5,0},{0,0,8,3,0,5,6,0,0},{2,0,0,0,0,0,0,0,0,1},{8,0,0,4,0,7,0,0,6},{0,0,6,0,0,0,3,0,0},{7,0,0,9,0,1,0,0,4},{5,0,0,0,0,0,0,0,2},{0,0,7,2,0,6,9,0,0},{0,4,0,5,0,8,0,7,0}};
+		*/
+	//System.out.println("ths value is"+in[1][0]);
+	auxSuokuPuzzle(in,0,0);
+	
+	}
+
+	private static void auxSuokuPuzzle(int[][] in,int row,int col)
+	{
+		//System.out.println("the value is"+in[row][col]+"row is"+row+"col is"+col);
+		if(row==9)
+		{
+			System.out.println("Hi"+in);
+			for(int fr=0;fr<9;fr++)
+			{
+				
+				System.out.println("");
+				System.out.println("------------------");
+				for(int fc=0;fc<9;fc++){
+					System.out.print(in[fr][fc]+"|");
+				}
+				
+			}
+			
+			return;
+		}
+		
+		//System.out.println("befor if"+in[row][col]+"values are"+row+"/"+col);
+		if(in[row][col]==0)
+		{
+			//System.out.println("insid ifff row and column valures are"+row+"/"+col);
+			//System.out.println("insid =0"+in[row][col]);
+			for(int i=1;i<=9;i++)
+			{
+				if(validate(in, i, row, col))
+				{
+					//System.out.println("b4 assisgning"+in[row][col]);
+					in[row][col]=i;
+				int sc,sr=0;
+					if(col==8)
+				{
+					
+					sr=row+1;
+					//System.out.println("row after incrementing is"+row);
+					sc=0;
+				}
+				else 
+				{
+					sc=col+1;
+				}
+				//System.out.println("row b4 calling isis"+row);
+				auxSuokuPuzzle(in,sr,sc);
+				
+				
+				}
+				in[row][col]=0;
+				/*else
+				{
+					
+				}*/
+			}
+		}else//already some element is present
+		{
+			//System.out.println("insid else row and column valures are"+row+"/"+col);
+			//System.out.println("inside else"+in[row][col]);
+			if(col==8)
+			{
+				col=0;
+				row=row+1;
+			}
+			else
+			{
+				col=col+1;
+			}
+		
+			auxSuokuPuzzle(in,row,col);
+		}
+	}
+	
+private static Boolean validate(int[][] in,int i,int row,int col)
+{
+	for(int r=0;r<9;r++)
+	{
+		if(in[r][col]==i)
+		{
+			return false;
+		}
+	}
+	for(int c=0;c<9;c++)
+	{
+		if(in[row][c]==i)
+		{
+			return false;
+		}
+	}
+
+int srow=row/3*3;
+int scol=col/3*3;
+for(int auxrow=0;auxrow<3;auxrow++)
+{
+	for(int auxcol=0;auxcol<3;auxcol++){
+		if(in[srow+auxrow][scol+auxcol]==i)
+		{
+			return false;
+		}
+	}
+	
+}
+	
+	return true;
+}
+
+
+}
