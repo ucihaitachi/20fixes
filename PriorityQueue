@@ -1,0 +1,104 @@
+package dataStructures.priorityqueue;
+
+import java.util.ArrayList;
+
+public class PriorityQueue<E> {
+
+
+	ArrayList<Integer> heap=new ArrayList<Integer>();
+	public boolean add(Integer element)
+{
+	heap.add(element);
+	//now balance the queue
+	int current=heap.size()-1;
+	while(current>0)
+	{
+		//if(heap.get((current-1)/2) < heap.get(current))
+		int rest=heap.get(current).compareTo(heap.get((current-1)/2));
+		
+		if(rest>0)
+		{
+			swap(heap,current);
+			current=(current-1)/2;
+		}else
+		{
+			break;
+		}
+	}
+	
+	
+	return true;
+}
+	private void swap(ArrayList<Integer> heap, Integer current) 
+	{
+	
+		int temp=heap.get(current);
+		//heap.add((current-1)/2)=heap.get((current-1)/2);
+		heap.set(current, heap.get((current-1)/2));
+		heap.set((current-1)/2,temp);
+		//heap.add((current-1)/2,temp);
+		
+	
+	}
+
+
+public  void displayheap()
+{
+	ArrayList<Integer> heap=this.heap;
+for(int i:heap)
+{
+	System.out.println(i);
+}
+}
+
+public void removeLast()
+{
+	swap(heap,0,heap.size()-1);
+	heap.remove(heap.size()-1);
+int i=heap.size(),current=0;
+while(2*current+1<i)
+{
+	/*System.out.println("current"+current);*/
+	int rest;
+	if(2*current+2<i)
+	{
+	rest=heap.get(2*current+1).compareTo(heap.get(2*current+2));
+	}else
+	{
+		rest=1; 
+	}
+		
+	if(rest<0)
+	{
+	if(heap.get(current).compareTo(heap.get((2*current+2)))<0)
+	{
+		swap(heap,current,2*current+2);
+	current=2*current+2;
+	}
+	else
+		break;
+	}else if(rest>0)
+	{
+		/*System.out.println("sdhsd"+heap.get(current).compareTo(heap.get(2*current+1)));*/
+		if(heap.get(current).compareTo(heap.get(2*current+1))<0)
+		{
+			swap(heap,current,2*current+1);
+		current=2*current+1;
+		}
+		else
+			break;
+	}
+}
+}
+
+
+void swap(ArrayList<Integer> heap,int first,int second)
+{
+	int temp=heap.get(second);
+	heap.set(second, heap.get(first));
+	heap.set(first, temp);
+	
+	
+}
+
+}
