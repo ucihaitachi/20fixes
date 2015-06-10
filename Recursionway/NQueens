@@ -1,0 +1,57 @@
+
+
+public class Nqueensrow {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		int[] output = new int[8];
+		int n=8;
+		auxQueen(output,8,0)	;
+
+	}
+	
+	public static void auxQueen(int[] out,int n,int d)
+	{
+		
+		
+		if(d==n)
+		{
+			System.out.println("-----------------------------------------");
+			for(int i:out)
+			{
+				System.out.println(i);
+			}
+		}
+		
+		
+		for(int column=0;column<n;column++)
+		{
+			if(valid(d,column,out))
+			{
+				out[d]=column;
+				auxQueen(out,n,d+1);
+							}
+		}
+		
+		
+		
+	}
+
+
+	public static Boolean valid(int d,int column,int[] out)
+	{
+		int row;
+		for(row=0;row<d;++row)
+		{
+			if(out[row]==column||Math.abs(d-row)==Math.abs(column-out[row]))
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
+
+}
