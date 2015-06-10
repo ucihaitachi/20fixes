@@ -1,0 +1,51 @@
+package dataStructures.terinarysearchtree;
+
+public class TSTNode {
+
+TSTNode left;
+TSTNode middle;
+TSTNode right;
+char data;
+boolean isword;
+
+
+
+public TSTNode(char data) {
+	
+	this.left = null;
+	this.middle = null;
+	this.right =null; 
+	this.data = data;
+}
+public TSTNode getLeft() {
+	return left;
+}
+public void setLeft(TSTNode left) {
+	this.left = left;
+}
+public TSTNode getMiddle() {
+	return middle;
+}
+public void setMiddle(TSTNode middle) {
+	this.middle = middle;
+}
+public TSTNode getRight() {
+	return right;
+}
+public void setRight(TSTNode right) {
+	this.right = right;
+}
+public char getData() {
+	return data;
+}
+public void setData(char data) {
+	this.data = data;
+}
+public boolean isIsword() {
+	return isword;
+}
+public void setIsword(boolean isword) {
+	this.isword = isword;
+}
+
+}
