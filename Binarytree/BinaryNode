@@ -1,0 +1,50 @@
+package dataStructures.BinarySearchTree;
+
+public class BinaryNode<e> implements Comparable<e>{
+
+e value;
+BinaryNode leftnode;
+BinaryNode rightnode;
+
+
+public BinaryNode(e value) {
+	super();
+	this.value = value;
+	this.leftnode = null;
+	this.rightnode = null;
+}
+public e getValue() {
+	return value;
+}
+public void setValue(e value) {
+	this.value = value;
+}
+public BinaryNode getLeftnode() {
+	return leftnode;
+}
+public void setLeftnode(BinaryNode leftnode) {
+	this.leftnode = leftnode;
+}
+public BinaryNode getRightnode() {
+	return rightnode;
+}
+public void setRightnode(BinaryNode rightnode) {
+	this.rightnode = rightnode;
+}
+@Override
+public int compareTo(e o) {
+	// TODO Auto-generated method stub
+	int currentvalue=(Integer)this.value;
+	int childvalue=(Integer)o;
+	if(childvalue<currentvalue){
+		return 1;
+	}else if(childvalue>currentvalue){
+		return -1;
+	}
+	
+	return 0;
+}
+
+
+
+}
