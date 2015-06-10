@@ -1,0 +1,107 @@
+package dataStructures.terinarysearchtree;
+
+public class TST {
+private TSTNode root;
+private int size;
+
+public TST() {
+	//super();
+	
+}
+
+public TSTNode add(String s)
+{
+	root=auxAdd(root,s,0);
+return root;
+}
+
+private TSTNode auxAdd(TSTNode current,String s,int i)
+{
+	if(current==null)
+	{
+		
+		
+		current=new TSTNode(s.charAt(i));
+	}
+	if( s.charAt(i)<current.data)
+	{
+		
+		current.left=auxAdd(current.left, s, i);
+	}else if( s.charAt(i)>current.data)
+	{
+			
+		current.right=auxAdd(current.right, s, i);
+	}else if(i<s.length())
+	{
+		
+		if(i+1>=s.length())
+		{
+			return current;
+		}
+		else
+		current.middle=auxAdd(current.middle, s,i+1);
+		
+	}else
+	{
+		System.out.println("11");
+		current.isword=true;
+		return current;
+	}
+	if(i==s.length()-1){
+	
+	}
+	return current;
+}
+
+
+public TSTNode getCurrentNode(TSTNode current,String s,int i)
+{
+	if(i<s.length())
+	{
+	if(s.charAt(i)==current.getData())
+	{
+		
+		if(i==s.length()-1)
+		{
+			
+			return current;//=getCurrentNode(current, s, i+1);
+		}else
+		
+			current=getCurrentNode(current.middle, s, i+1);	
+		
+		
+	}else if(s.charAt(i)<current.getData())
+	{
+		current=getCurrentNode(current.left, s, i);
+		
+	}else if(s.charAt(i)>current.getData())
+	{
+		current=getCurrentNode(current.right, s, i);
+		
+	}
+	}
+	//if(current!=null)
+		//System.out.println("value is"+current.data);
+	return current;
+}
+
+
+public TSTNode getAllStrings(TSTNode current,String s)
+{
+	
+if(current.middle!=null)
+{
+	//s=s+current.middle.getData();
+	System.out.println(s+current.middle.getData());
+  getAllStrings(current.middle,s);
+}else if(current.right!=null)
+{
+	System.out.println(s+current.right.getData());
+getAllStrings(current.right, s);
+}
+return current;
+}
+
+
+
+}
